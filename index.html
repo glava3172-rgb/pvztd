@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PvZ Tower Defense</title>
+<style>
+body { font-family: Arial; background:#1d1f21; color:#fff; margin:0; }
+header { background:#2d8f2d; padding:20px; text-align:center; font-size:32px; font-weight:bold; }
+nav { background:#111; padding:10px; display:flex; justify-content:center; gap:20px; }
+nav a { color:#fff; text-decoration:none; font-size:18px; }
+nav a:hover { color:#7ce47c; }
+.section { max-width:900px; margin:40px auto; padding:20px; background:#282a2e; border-radius:12px; opacity:0; transform:translateY(50px); transition:all 1s ease; }
+.tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; }
+button { padding:10px 20px; background:#2d8f2d; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; }
+button:hover { background:#7ce47c; color:#000; transform:scale(1.1); }
+footer { text-align:center; padding:20px; margin-top:40px; background:#111; font-size:14px; color:#888; }
+</style>
+</head>
+<body>
+
+<header>PvZ Tower Defense – Roblox Game</header>
+
+<nav>
+<a href="#about">About</a>
+<a href="#towers">Towers</a>
+<a href="#zombies">Zombies</a>
+<a href="#updates">Updates</a>
+</nav>
+
+<div class="section" id="about">
+<h2>About the Game</h2>
+<p>PvZ Tower Defense is a Roblox tower defense game inspired by Plants vs Zombies. Build towers, defend lanes, and survive waves of zombies!</p>
+<button onclick="alert('Play the game on Roblox!')">Play on Roblox</button>
+</div>
+
+<div class="section" id="towers">
+<h2>Towers</h2>
+<div class="tower">
+<h3>Peashooter</h3>
+<p>Basic tower that shoots peas. Cheap and reliable.</p>
+</div>
+<div class="tower">
+<h3>Sunflower</h3>
+<p>Generates sun energy to buy more towers.</p>
+</div>
+<div class="tower">
+<h3>Fire Peashooter</h3>
+<p>Shoots fire peas, deals extra damage.</p>
+</div>
+</div>
+
+<div class="section" id="zombies">
+<h2>Zombies</h2>
+<div class="zombie">
+<h3>Regular Zombie</h3>
+<p>Slow, basic enemy. Appears in early waves.</p>
+</div>
+<div class="zombie">
+<h3>Conehead Zombie</h3>
+<p>More health, requires more damage to defeat.</p>
+</div>
+<div class="zombie">
+<h3>Buckethead Zombie</h3>
+<p>Very tough enemy, can take lots of hits.</p>
+</div>
+</div>
+
+<div class="section" id="updates">
+<h2>Latest Updates</h2>
+<p>Update 1.0: Initial release with 3 towers and 3 zombies.</p>
+</div>
+
+<footer>© 2025 PvZ Tower Defense – Fan Project</footer>
+
+<script>
+// 🟢 Анимация появления секций при скролле
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    const height = window.innerHeight;
+    if(top < height - 100){
+      section.style.opacity = 1;
+      section.style.transform = 'translateY(0)';
+    }
+  });
+});
+
+// 🟢 Кнопка Play на Roblox с анимацией
+const playButton = document.querySelector('button');
+playButton.addEventListener('mouseenter', () => {
+  playButton.style.transform = 'scale(1.2)';
+  playButton.style.background = '#7ce47c';
+  playButton.style.color = '#000';
+});
+playButton.addEventListener('mouseleave', () => {
+  playButton.style.transform = 'scale(1)';
+  playButton.style.background = '#2d8f2d';
+  playButton.style.color = '#fff';
+});
+
+// 🟢 Зомби прыгают при наведении
+const zombies = document.querySelectorAll('.zombie');
+zombies.forEach(zombie => {
+  zombie.addEventListener('mouseenter', () => {
+    zombie.style.transform = 'translateY(-10px)';
+  });
+  zombie.addEventListener('mouseleave', () => {
+    zombie.style.transform = 'translateY(0)';
+  });
+});
+
+// 🟢 Башни слегка пульсируют
+const towers = document.querySelectorAll('.tower');
+setInterval(() => {
+  towers.forEach(tower => {
+    tower.style.transform = `scale(${1 + Math.random() * 0.05})`;
+  });
+}, 1000);
+
+// 🟢 Приветственное сообщение в консоли
+console.log("PvZ Tower Defense Site Loaded Successfully!");
+</script>
+
+</body>
+</html>
