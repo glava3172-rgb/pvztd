@@ -12,7 +12,15 @@ nav a { color:#fff; text-decoration:none; font-size:18px; }
 nav a:hover { color:#7ce47c; }
 .section { max-width:900px; margin:40px auto; padding:20px; background:#282a2e; border-radius:12px; opacity:0; transform:translateY(50px); transition:all 1s ease; }
 .tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; position:relative; }
-.tower img { display: block; margin: 10px auto; border: 2px solid #7ce47c; border-radius: 8px; max-width: 100%; max-height: 150px; object-fit: contain; }
+.tower img {
+  display: block;
+  margin: 10px auto;
+  border: 2px solid #7ce47c;
+  border-radius: 8px;
+  width: 100px;       /* фиксированная ширина рамки */
+  height: 100px;      /* фиксированная высота рамки */
+  object-fit: contain; /* сохраняет пропорции внутри рамки */
+}
 button { padding:10px 20px; background:#2d8f2d; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; }
 button:hover { background:#7ce47c; color:#000; transform:scale(1.1); }
 footer { text-align:center; padding:20px; margin-top:40px; background:#111; font-size:14px; color:#888; }
@@ -64,12 +72,12 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 <div class="zombie"><h3>Regular Zombie</h3><p>Slow, basic enemy. Appears in early waves.</p></div>
 <div class="zombie"><h3>Conehead Zombie</h3><p>More health, requires more damage to defeat.</p></div>
 <div class="zombie"><h3>Buckethead Zombie</h3><p>Very tough enemy, can take lots of hits.</p></div>
-<p>Wave: <span id="wave-counter">1</span></p>
+<p>Wave: <span id="wave-counter\">1</span></p>
 </div>
 
 <div class="section" id="updates">
 <h2>Latest Updates</h2>
-<p>Update 2.3: Adjusted Cactus image to fit default tower frame, Sunflower glow, dynamic waves, projectile animation, and Roblox game link.</p>
+<p>Update 2.4: Cactus image теперь идеально вписан в стандартную рамку, Sunflower glow, динамические волны, снаряды и кнопка Roblox.</p>
 </div>
 
 <footer>© 2025 PvZ Tower Defense – Fan Project</footer>
