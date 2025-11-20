@@ -95,6 +95,7 @@
   .tower-meta{flex:1}
   .tower-meta h3{margin:0;font-size:16px}
   .tower-meta p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+  .stats-box{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.4}
 
   /* image wrapper (fixed square) */
   .tower-img-wrapper{
@@ -182,19 +183,25 @@
     <h2 style="margin:0 0 8px 0">Towers</h2>
     <div class="grid" id="towersGrid">
 
-      <!-- Cactus (использует твой загруженный файл по локальному пути) -->
+      <!-- Cactus с Imgur -->
       <div class="card">
         <div class="tower-meta">
           <h3>Cactus</h3>
           <p>Defensive tower — стреляет шипами, тормозит врагов.</p>
+          <div class="stats-box">
+            <strong>Characteristics:</strong><br>
+            Damage: 50 → 150<br>
+            Range: 8 → 14<br>
+            Cooldown: 1.5 → 0.7<br>
+            DPS: 33 → 214
+          </div>
         </div>
         <div class="tower-img-wrapper">
-          <!-- Локальная картинка, которую ты загрузил; путь: /mnt/data/Снимок экрана 2025-11-20 223512.png -->
-          <img src="/mnt/data/Снимок экрана 2025-11-20 223512.png" alt="Cactus">
+          <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus">
         </div>
       </div>
 
-      <!-- остальные башни (временные плейсхолдеры) -->
+      <!-- остальные башни (плейсхолдеры) -->
       <div class="card">
         <div class="tower-meta"><h3>Watermelon</h3><p>Heavy splash damage.</p></div>
         <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Water" alt="Watermelon"></div>
@@ -207,48 +214,13 @@
 
       <div class="card">
         <div class="tower-meta"><h3>Lemon Pult</h3><p>Long-range lemons.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Lemon" alt="Lemon"></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Lemon" alt="Lemon Pult"></div>
       </div>
 
       <div class="card">
         <div class="tower-meta"><h3>Sunflower</h3><p>Generates sun for building.</p></div>
         <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Sun" alt="Sunflower"></div>
         <div class="sun-effect" aria-hidden="true"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Strawberry</h3><p>Fast attacker.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Straw" alt="Strawberry"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Carnivorous Plant</h3><p>Melee chomper.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carn" alt="Carnivorous"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Mr Carrot</h3><p>Long-range shot.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carrot" alt="Mr Carrot"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Witch Hazel</h3><p>Slows enemies.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Witch" alt="Witch Hazel"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Jack</h3><p>Explosive pumpkin attack.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Jack" alt="Jack"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Citron</h3><p>Heavy range DPS.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Citron" alt="Citron"></div>
-      </div>
-
-      <div class="card">
-        <div class="tower-meta"><h3>Fire Peashooter</h3><p>Burns enemies.</p></div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Fire" alt="Fire Peashooter"></div>
       </div>
 
     </div>
@@ -264,7 +236,7 @@
 
   <section class="section" id="updates">
     <h2 style="margin:0 0 8px 0">Updates</h2>
-    <p style="color:var(--muted)">Update: mixed style, particle effects, mobile tweaks, and fixed Cactus image.</p>
+    <p style="color:var(--muted)">Update: mixed style, particle effects, mobile tweaks, and updated Cactus image.</p>
   </section>
 
 </main>
@@ -276,13 +248,10 @@
 /* -----------------------
   Interactions & effects
 ------------------------*/
-
-// Play button opens Roblox mode
 document.getElementById('playGame').addEventListener('click', () => {
   window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank');
 });
 
-// wave counter (demo)
 let wave = 1;
 setInterval(()=> {
   wave++;
@@ -290,19 +259,16 @@ setInterval(()=> {
   document.getElementById('waveCounter')?.textContent = wave;
 }, 10000);
 
-// fake players number for UI (just demo)
 setInterval(()=> {
   const p = Math.floor(20 + Math.random()*180);
   document.getElementById('players').textContent = p;
 }, 3000);
 
-// small tower breathing animation via CSS transform (periodic)
 const cards = document.querySelectorAll('.card');
 setInterval(()=> {
   cards.forEach(c => c.style.transform = `translateY(${Math.random()*2}px)`);
 }, 1200);
 
-// hover micro animations: highlight meta & image
 document.querySelectorAll('.card').forEach(card=>{
   card.addEventListener('mouseenter', ()=> {
     const imgWrap = card.querySelector('.tower-img-wrapper');
@@ -314,12 +280,10 @@ document.querySelectorAll('.card').forEach(card=>{
   });
 });
 
-// particles generator (leaves)
 const particlesRoot = document.getElementById('particles');
 function spawnLeaf(){
   const leaf = document.createElement('div');
   leaf.className = 'leaf';
-  // random start position
   leaf.style.left = Math.random()*100 + 'vw';
   leaf.style.top = -20 + 'px';
   leaf.style.opacity = (0.5 + Math.random()*0.6);
@@ -334,7 +298,6 @@ function spawnLeaf(){
 }
 setInterval(spawnLeaf, 800);
 
-// reveal sections on load/scroll
 const sections = document.querySelectorAll('.section, .hero');
 function reveal(){ sections.forEach(s => {
   const r = s.getBoundingClientRect();
@@ -343,7 +306,6 @@ function reveal(){ sections.forEach(s => {
 window.addEventListener('scroll', reveal);
 window.addEventListener('load', reveal);
 
-/* Accessibility: keyboard on play button */
 document.getElementById('playGame').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
@@ -351,8 +313,7 @@ document.getElementById('playGame').addEventListener('keydown', (e)=>{
   }
 });
 
-console.log("New PvZ TD site loaded (mixed style).");
+console.log("PvZ TD site loaded with updated Cactus image.");
 </script>
-</body>
+</body> 
 </html>
-
