@@ -12,6 +12,7 @@ nav a { color:#fff; text-decoration:none; font-size:18px; }
 nav a:hover { color:#7ce47c; }
 .section { max-width:900px; margin:40px auto; padding:20px; background:#282a2e; border-radius:12px; opacity:0; transform:translateY(50px); transition:all 1s ease; }
 .tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; position:relative; }
+.tower img { display: block; margin: 10px auto; border: 2px solid #7ce47c; border-radius: 8px; max-width: 100%; }
 button { padding:10px 20px; background:#2d8f2d; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; }
 button:hover { background:#7ce47c; color:#000; transform:scale(1.1); }
 footer { text-align:center; padding:20px; margin-top:40px; background:#111; font-size:14px; color:#888; }
@@ -35,13 +36,16 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 <div class="section" id="about">
 <h2>About the Game</h2>
 <p>PvZ Tower Defense is a Roblox tower defense game inspired by Plants vs Zombies. Build towers, defend lanes, and survive waves of zombies!</p>
-<!-- Кнопка теперь открывает Roblox режим напрямую -->
 <button onclick="window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank')">Play on Roblox</button>
 </div>
 
 <div class="section" id="towers">
 <h2>Towers</h2>
-<div class="tower"><h3>Cactus</h3><p>Defensive tower, shoots spikes.</p></div>
+<div class="tower">
+  <h3>Cactus</h3>
+  <p>Defensive tower, shoots spikes.</p>
+  <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus PvZ" width="200">
+</div>
 <div class="tower"><h3>Watermelon</h3><p>Deals heavy splash damage.</p></div>
 <div class="tower"><h3>Cocotank</h3><p>High damage, shoots coconuts.</p></div>
 <div class="tower"><h3>Lemon Pult</h3><p>Throws lemons at zombies.</p></div>
@@ -65,7 +69,7 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 
 <div class="section" id="updates">
 <h2>Latest Updates</h2>
-<p>Update 2.0: Added Sunflower glow, dynamic waves, projectile animation, and Roblox game link.</p>
+<p>Update 2.2: Added Cactus image from Imgur, Sunflower glow, dynamic waves, projectile animation, and Roblox game link.</p>
 </div>
 
 <footer>© 2025 PvZ Tower Defense – Fan Project</footer>
