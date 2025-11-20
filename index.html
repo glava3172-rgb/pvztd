@@ -35,6 +35,7 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 <div class="section" id="about">
 <h2>About the Game</h2>
 <p>PvZ Tower Defense is a Roblox tower defense game inspired by Plants vs Zombies. Build towers, defend lanes, and survive waves of zombies!</p>
+<!-- Кнопка теперь открывает Roblox режим напрямую -->
 <button onclick="window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank')">Play on Roblox</button>
 </div>
 
@@ -83,7 +84,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Кнопка Play на Roblox теперь открывает твой режим
+// Кнопка Play на Roblox с эффектами
 const playButton = document.querySelector('button');
 playButton.addEventListener('mouseenter', () => {
   playButton.style.transform = 'scale(1.2)';
