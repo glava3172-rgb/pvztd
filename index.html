@@ -11,10 +11,18 @@ nav { background:#111; padding:10px; display:flex; justify-content:center; gap:2
 nav a { color:#fff; text-decoration:none; font-size:18px; }
 nav a:hover { color:#7ce47c; }
 .section { max-width:900px; margin:40px auto; padding:20px; background:#282a2e; border-radius:12px; opacity:0; transform:translateY(50px); transition:all 1s ease; }
-.tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; }
+.tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; position:relative; }
 button { padding:10px 20px; background:#2d8f2d; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; }
 button:hover { background:#7ce47c; color:#000; transform:scale(1.1); }
 footer { text-align:center; padding:20px; margin-top:40px; background:#111; font-size:14px; color:#888; }
+
+/* Солнечный эффект для Sunflower */
+.sun-effect { position:absolute; top:-10px; right:-10px; width:20px; height:20px; background:yellow; border-radius:50%; box-shadow: 0 0 10px yellow; animation: glow 1.5s infinite alternate; }
+@keyframes glow { 0% { box-shadow: 0 0 5px yellow; } 100% { box-shadow: 0 0 20px yellow; } }
+
+/* Снаряды */
+.projectile { position:absolute; width:10px; height:10px; background:#ff4500; border-radius:50%; animation: shoot 2s linear infinite; }
+@keyframes shoot { 0% { transform:translateX(0) translateY(0); opacity:1; } 100% { transform:translateX(300px) translateY(-50px); opacity:0; } }
 </style>
 </head>
 <body>
@@ -36,45 +44,39 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 
 <div class="section" id="towers">
 <h2>Towers</h2>
-<div class="tower">
-<h3>Peashooter</h3>
-<p>Basic tower that shoots peas. Cheap and reliable.</p>
-</div>
-<div class="tower">
-<h3>Sunflower</h3>
-<p>Generates sun energy to buy more towers.</p>
-</div>
-<div class="tower">
-<h3>Fire Peashooter</h3>
-<p>Shoots fire peas, deals extra damage.</p>
-</div>
+
+<div class="tower"><h3>Cactus</h3><p>Defensive tower, shoots spikes.</p></div>
+<div class="tower"><h3>Watermelon</h3><p>Deals heavy splash damage.</p></div>
+<div class="tower"><h3>Cocotank</h3><p>High damage, shoots coconuts.</p></div>
+<div class="tower"><h3>Lemon Pult</h3><p>Throws lemons at zombies.</p></div>
+<div class="tower"><h3>Sunflower</h3><p>Generates sun energy for towers.</p><div class="sun-effect"></div></div>
+<div class="tower"><h3>Strawberry</h3><p>Medium damage, fast attack speed.</p></div>
+<div class="tower"><h3>Carnivorous Plant</h3><p>Bites zombies in melee range.</p></div>
+<div class="tower"><h3>Mr Carrot</h3><p>Long range, shoots carrots.</p></div>
+<div class="tower"><h3>Witch Hazel</h3><p>Magic attack that slows zombies.</p></div>
+<div class="tower"><h3>Jack</h3><p>Explosive pumpkin attack.</p></div>
+<div class="tower"><h3>Citron</h3><p>Heavy firepower with high range.</p></div>
+<div class="tower"><h3>Fire Peashooter</h3><p>Shoots fire peas, deals extra damage.</p></div>
+
 </div>
 
 <div class="section" id="zombies">
 <h2>Zombies</h2>
-<div class="zombie">
-<h3>Regular Zombie</h3>
-<p>Slow, basic enemy. Appears in early waves.</p>
-</div>
-<div class="zombie">
-<h3>Conehead Zombie</h3>
-<p>More health, requires more damage to defeat.</p>
-</div>
-<div class="zombie">
-<h3>Buckethead Zombie</h3>
-<p>Very tough enemy, can take lots of hits.</p>
-</div>
+<div class="zombie"><h3>Regular Zombie</h3><p>Slow, basic enemy. Appears in early waves.</p></div>
+<div class="zombie"><h3>Conehead Zombie</h3><p>More health, requires more damage to defeat.</p></div>
+<div class="zombie"><h3>Buckethead Zombie</h3><p>Very tough enemy, can take lots of hits.</p></div>
+<p>Wave: <span id="wave-counter">1</span></p>
 </div>
 
 <div class="section" id="updates">
 <h2>Latest Updates</h2>
-<p>Update 1.0: Initial release with 3 towers and 3 zombies.</p>
+<p>Update 2.0: Added Sunflower glow, dynamic waves, and projectile animation.</p>
 </div>
 
 <footer>© 2025 PvZ Tower Defense – Fan Project</footer>
 
 <script>
-// 🟢 Анимация появления секций при скролле
+// Анимация появления секций
 const sections = document.querySelectorAll('.section');
 window.addEventListener('scroll', () => {
   sections.forEach(section => {
@@ -87,7 +89,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// 🟢 Кнопка Play на Roblox с анимацией
+// Кнопка Play на Roblox с анимацией
 const playButton = document.querySelector('button');
 playButton.addEventListener('mouseenter', () => {
   playButton.style.transform = 'scale(1.2)';
@@ -100,7 +102,7 @@ playButton.addEventListener('mouseleave', () => {
   playButton.style.color = '#fff';
 });
 
-// 🟢 Зомби прыгают при наведении
+// Зомби прыгают при наведении
 const zombies = document.querySelectorAll('.zombie');
 zombies.forEach(zombie => {
   zombie.addEventListener('mouseenter', () => {
@@ -111,7 +113,7 @@ zombies.forEach(zombie => {
   });
 });
 
-// 🟢 Башни слегка пульсируют
+// Башни слегка пульсируют
 const towers = document.querySelectorAll('.tower');
 setInterval(() => {
   towers.forEach(tower => {
@@ -119,8 +121,23 @@ setInterval(() => {
   });
 }, 1000);
 
-// 🟢 Приветственное сообщение в консоли
-console.log("PvZ Tower Defense Site Loaded Successfully!");
+// Динамический счётчик волн
+let wave = 1;
+setInterval(() => {
+  wave++;
+  document.getElementById('wave-counter').textContent = wave;
+}, 10000);
+
+// Символические снаряды от башен
+setInterval(() => {
+  const projectile = document.createElement('div');
+  projectile.classList.add('projectile');
+  projectile.style.top = Math.random() * 200 + 'px';
+  document.body.appendChild(projectile);
+  setTimeout(() => { projectile.remove(); }, 2000);
+}, 2000);
+
+console.log("PvZ Tower Defense Dynamic Site Loaded!");
 </script>
 
 </body>
