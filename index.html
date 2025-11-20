@@ -11,16 +11,28 @@ nav { background:#111; padding:10px; display:flex; justify-content:center; gap:2
 nav a { color:#fff; text-decoration:none; font-size:18px; }
 nav a:hover { color:#7ce47c; }
 .section { max-width:900px; margin:40px auto; padding:20px; background:#282a2e; border-radius:12px; opacity:0; transform:translateY(50px); transition:all 1s ease; }
-.tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; position:relative; }
-.tower img {
-  display: block;
+.tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; position:relative; text-align:center; }
+
+/* Обертка для картинок башен */
+.tower-img-wrapper {
+  width: 100px;
+  height: 100px;
   margin: 10px auto;
   border: 2px solid #7ce47c;
   border-radius: 8px;
-  width: 100px;       /* фиксированная ширина рамки */
-  height: 100px;      /* фиксированная высота рамки */
-  object-fit: contain; /* сохраняет пропорции внутри рамки */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #1f2022;
 }
+
+.tower-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 button { padding:10px 20px; background:#2d8f2d; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; }
 button:hover { background:#7ce47c; color:#000; transform:scale(1.1); }
 footer { text-align:center; padding:20px; margin-top:40px; background:#111; font-size:14px; color:#888; }
@@ -49,22 +61,104 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 
 <div class="section" id="towers">
 <h2>Towers</h2>
+
 <div class="tower">
   <h3>Cactus</h3>
   <p>Defensive tower, shoots spikes.</p>
-  <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus PvZ">
+  <div class="tower-img-wrapper">
+    <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus PvZ">
+  </div>
 </div>
-<div class="tower"><h3>Watermelon</h3><p>Deals heavy splash damage.</p></div>
-<div class="tower"><h3>Cocotank</h3><p>High damage, shoots coconuts.</p></div>
-<div class="tower"><h3>Lemon Pult</h3><p>Throws lemons at zombies.</p></div>
-<div class="tower"><h3>Sunflower</h3><p>Generates sun energy for towers.</p><div class="sun-effect"></div></div>
-<div class="tower"><h3>Strawberry</h3><p>Medium damage, fast attack speed.</p></div>
-<div class="tower"><h3>Carnivorous Plant</h3><p>Bites zombies in melee range.</p></div>
-<div class="tower"><h3>Mr Carrot</h3><p>Long range, shoots carrots.</p></div>
-<div class="tower"><h3>Witch Hazel</h3><p>Magic attack that slows zombies.</p></div>
-<div class="tower"><h3>Jack</h3><p>Explosive pumpkin attack.</p></div>
-<div class="tower"><h3>Citron</h3><p>Heavy firepower with high range.</p></div>
-<div class="tower"><h3>Fire Peashooter</h3><p>Shoots fire peas, deals extra damage.</p></div>
+
+<div class="tower">
+  <h3>Watermelon</h3>
+  <p>Deals heavy splash damage.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Watermelon" alt="Watermelon PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Cocotank</h3>
+  <p>High damage, shoots coconuts.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Cocotank" alt="Cocotank PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Lemon Pult</h3>
+  <p>Throws lemons at zombies.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Lemon" alt="Lemon PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Sunflower</h3>
+  <p>Generates sun energy for towers.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Sunflower" alt="Sunflower PvZ">
+  </div>
+  <div class="sun-effect"></div>
+</div>
+
+<div class="tower">
+  <h3>Strawberry</h3>
+  <p>Medium damage, fast attack speed.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Strawberry" alt="Strawberry PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Carnivorous Plant</h3>
+  <p>Bites zombies in melee range.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Carnivorous" alt="Carnivorous PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Mr Carrot</h3>
+  <p>Long range, shoots carrots.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Mr+Carrot" alt="Mr Carrot PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Witch Hazel</h3>
+  <p>Magic attack that slows zombies.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Witch+Hazel" alt="Witch Hazel PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Jack</h3>
+  <p>Explosive pumpkin attack.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Jack" alt="Jack PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Citron</h3>
+  <p>Heavy firepower with high range.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Citron" alt="Citron PvZ">
+  </div>
+</div>
+
+<div class="tower">
+  <h3>Fire Peashooter</h3>
+  <p>Shoots fire peas, deals extra damage.</p>
+  <div class="tower-img-wrapper">
+    <img src="https://via.placeholder.com/100x100.png?text=Fire+Peashooter" alt="Fire Peashooter PvZ">
+  </div>
+</div>
+
 </div>
 
 <div class="section" id="zombies">
@@ -72,12 +166,12 @@ footer { text-align:center; padding:20px; margin-top:40px; background:#111; font
 <div class="zombie"><h3>Regular Zombie</h3><p>Slow, basic enemy. Appears in early waves.</p></div>
 <div class="zombie"><h3>Conehead Zombie</h3><p>More health, requires more damage to defeat.</p></div>
 <div class="zombie"><h3>Buckethead Zombie</h3><p>Very tough enemy, can take lots of hits.</p></div>
-<p>Wave: <span id="wave-counter\">1</span></p>
+<p>Wave: <span id="wave-counter">1</span></p>
 </div>
 
 <div class="section" id="updates">
 <h2>Latest Updates</h2>
-<p>Update 2.4: Cactus image теперь идеально вписан в стандартную рамку, Sunflower glow, динамические волны, снаряды и кнопка Roblox.</p>
+<p>Update 2.5: Все башни теперь в одинаковой рамке, включая Cactus с Imgur. Сохранены эффекты: пульсация башен, снаряды, счетчик волн и кнопка Roblox.</p>
 </div>
 
 <footer>© 2025 PvZ Tower Defense – Fan Project</footer>
