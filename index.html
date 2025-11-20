@@ -1,245 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PvZ Tower Defense</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PvZ Tower Defense — Fan Site</title>
 <style>
-body { font-family: Arial; background:#1d1f21; color:#fff; margin:0; }
-header { background:#2d8f2d; padding:20px; text-align:center; font-size:32px; font-weight:bold; }
-nav { background:#111; padding:10px; display:flex; justify-content:center; gap:20px; }
-nav a { color:#fff; text-decoration:none; font-size:18px; }
-nav a:hover { color:#7ce47c; }
-.section { max-width:900px; margin:40px auto; padding:20px; background:#282a2e; border-radius:12px; opacity:0; transform:translateY(50px); transition:all 1s ease; }
-.tower, .zombie { background:#1f2022; padding:15px; margin-top:10px; border-radius:8px; transition: all 0.3s ease; position:relative; text-align:center; }
+  :root{
+    --bg:#0f1112;
+    --panel:#202428;
+    --accent:#38d169; /* зелёный акцент */
+    --accent-2:#8b5cf6; /* мягкий фиолетовый для контраста */
+    --muted:#9aa3a8;
+    --glass: rgba(255,255,255,0.04);
+    --card-radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Inter, Roboto, Arial, sans-serif;
+    background:
+      linear-gradient(180deg, rgba(20,22,23,0.95) 0%, rgba(9,10,11,1) 100%);
+    color:#eef2f3;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
 
-/* Обертка для картинок башен */
-.tower-img-wrapper {
-  width: 100px;
-  height: 100px;
-  margin: 10px auto;
-  border: 2px solid #7ce47c;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: #1f2022;
-}
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:18px 22px;
+    background:linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .logo {
+    width:48px;height:48px;border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;color:#061013;box-shadow:0 6px 18px rgba(14,20,16,0.45);
+  }
+  .brand h1{font-size:18px;margin:0}
+  nav{display:flex;gap:10px;align-items:center}
+  nav a{
+    color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:14px;
+  }
+  nav a:hover{background:var(--glass); color:#fff}
 
-.tower-img-wrapper img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
+  .container{
+    max-width:1080px;margin:26px auto;padding:0 18px;
+  }
 
-button { padding:10px 20px; background:#2d8f2d; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:bold; transition:all 0.3s ease; }
-button:hover { background:#7ce47c; color:#000; transform:scale(1.1); }
-footer { text-align:center; padding:20px; margin-top:40px; background:#111; font-size:14px; color:#888; }
-.sun-effect { position:absolute; top:-10px; right:-10px; width:20px; height:20px; background:yellow; border-radius:50%; box-shadow: 0 0 10px yellow; animation: glow 1.5s infinite alternate; }
-@keyframes glow { 0% { box-shadow: 0 0 5px yellow; } 100% { box-shadow: 0 0 20px yellow; } }
-.projectile { position:absolute; width:10px; height:10px; background:#ff4500; border-radius:50%; animation: shoot 2s linear infinite; }
-@keyframes shoot { 0% { transform:translateX(0) translateY(0); opacity:1; } 100% { transform:translateX(300px) translateY(-50px); opacity:0; } }
+  .hero{
+    display:flex;gap:18px;align-items:center;
+    background:linear-gradient(180deg, rgba(32,36,40,0.6), rgba(28,30,32,0.6));
+    padding:18px;border-radius:16px;box-shadow:0 6px 30px rgba(0,0,0,0.6);
+  }
+  .hero-left{flex:1}
+  .hero-right{width:260px;display:flex;flex-direction:column;gap:12px;align-items:center}
+
+  .play-btn{
+    background:linear-gradient(90deg,var(--accent),#79f2b6);
+    border:none;padding:12px 18px;border-radius:12px;font-weight:700;font-size:16px;color:#031010;cursor:pointer;
+    box-shadow:0 8px 24px rgba(56,209,105,0.12), inset 0 -2px 6px rgba(0,0,0,0.12);
+  }
+  .play-btn:active{transform:scale(.99)}
+
+  .desc{color:var(--muted);line-height:1.4;margin-top:8px;font-size:14px}
+
+  /* grid of towers */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;margin-top:20px;
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:var(--card-radius);padding:12px;border:1px solid rgba(255,255,255,0.03);
+    display:flex;gap:12px;align-items:center;position:relative;overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+
+  .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.6); }
+
+  .tower-meta{flex:1}
+  .tower-meta h3{margin:0;font-size:16px}
+  .tower-meta p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+
+  /* image wrapper (fixed square) */
+  .tower-img-wrapper{
+    width:80px;height:80px;border-radius:10px;border:2px solid rgba(255,255,255,0.04);
+    overflow:hidden;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.01));
+    transition: box-shadow .25s ease, transform .25s ease;
+  }
+  .tower-img-wrapper img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* glow on hover */
+  .card:hover .tower-img-wrapper{ box-shadow: 0 8px 30px rgba(56,209,105,0.18); transform:scale(1.03); border-color: rgba(56,209,105,0.7); }
+
+  /* sunflower specific little glow */
+  .sun-effect{
+    position:absolute;right:10px;top:10px;width:10px;height:10px;border-radius:50%;
+    background: radial-gradient(circle, #fff8b3 0%, #ffd34d 35%, #ffb400 100%);
+    box-shadow:0 0 8px rgba(255,206,90,0.8);
+    animation: pulse 1.6s infinite ease-in-out;
+  }
+  @keyframes pulse{0%{transform:scale(.9)}50%{transform:scale(1.12)}100%{transform:scale(.9)}}
+
+  /* small-screen responsive */
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .hero-right{width:200px}
+  }
+  @media (max-width:520px){
+    header{padding:12px}
+    .grid{grid-template-columns:1fr}
+    .hero{flex-direction:column}
+    .hero-right{width:100%;align-items:stretch}
+    nav{display:none}
+    .container{padding:10px}
+  }
+
+  /* particles (leaves) */
+  .particles{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;overflow:hidden;z-index:0}
+  .leaf{
+    position:absolute;width:14px;height:14px;background:linear-gradient(135deg,#6cd37a,#2fb86b);
+    transform:rotate(20deg);opacity:.9;border-radius:3px;
+    animation:fall infinite linear;
+  }
+  @keyframes fall { 0%{transform:translateY(-10vh) rotate(0deg);opacity:0} 10%{opacity:1}
+    100%{transform:translateY(110vh) rotate(360deg); opacity:0} }
 </style>
 </head>
 <body>
 
-<header>PvZ Tower Defense – Roblox Game</header>
-
-<nav>
-<a href="#about">About</a>
-<a href="#towers">Towers</a>
-<a href="#zombies">Zombies</a>
-<a href="#updates">Updates</a>
-</nav>
-
-<div class="section" id="about">
-<h2>About the Game</h2>
-<p>PvZ Tower Defense is a Roblox tower defense game inspired by Plants vs Zombies. Build towers, defend lanes, and survive waves of zombies!</p>
-<button onclick="window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank')">Play on Roblox</button>
-</div>
-
-<div class="section" id="towers">
-<h2>Towers</h2>
-
-<div class="tower">
-  <h3>Cactus</h3>
-  <p>Defensive tower, shoots spikes.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus PvZ">
+<header>
+  <div class="brand">
+    <div class="logo">PvZ</div>
+    <div>
+      <h1>PvZ Tower Defense</h1>
+      <div style="font-size:12px;color:var(--muted)">Fan project • Roblox mode</div>
+    </div>
   </div>
-</div>
 
-<div class="tower">
-  <h3>Watermelon</h3>
-  <p>Deals heavy splash damage.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Watermelon" alt="Watermelon PvZ">
-  </div>
-</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#towers">Towers</a>
+    <a href="#zombies">Zombies</a>
+    <a href="#updates">Updates</a>
+  </nav>
+</header>
 
-<div class="tower">
-  <h3>Cocotank</h3>
-  <p>High damage, shoots coconuts.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Cocotank" alt="Cocotank PvZ">
-  </div>
-</div>
+<main class="container" role="main">
+  <section class="hero">
+    <div class="hero-left">
+      <h2 style="margin:0 0 6px 0">PvZ Tower Defense — официальный фан-сайт режима</h2>
+      <div class="desc">Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox.</div>
+      <div style="margin-top:12px"><button class="play-btn" id="playGame">Play PvZ TD</button></div>
+    </div>
+    <div class="hero-right">
+      <div style="background:linear-gradient(135deg, rgba(56,209,105,0.08), rgba(139,92,246,0.06)); padding:12px; border-radius:12px; text-align:center;">
+        <div style="font-size:12px;color:var(--muted)">Current wave</div>
+        <div id="wave" style="font-size:28px;font-weight:800">1</div>
+      </div>
+      <div style="font-size:13px;color:var(--muted); text-align:center; margin-top:6px">Players online: <strong id="players">—</strong></div>
+    </div>
+  </section>
 
-<div class="tower">
-  <h3>Lemon Pult</h3>
-  <p>Throws lemons at zombies.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Lemon" alt="Lemon PvZ">
-  </div>
-</div>
+  <!-- towers grid -->
+  <section class="section" id="towers">
+    <h2 style="margin:0 0 8px 0">Towers</h2>
+    <div class="grid" id="towersGrid">
 
-<div class="tower">
-  <h3>Sunflower</h3>
-  <p>Generates sun energy for towers.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Sunflower" alt="Sunflower PvZ">
-  </div>
-  <div class="sun-effect"></div>
-</div>
+      <!-- Cactus (использует твой загруженный файл по локальному пути) -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Cactus</h3>
+          <p>Defensive tower — стреляет шипами, тормозит врагов.</p>
+        </div>
+        <div class="tower-img-wrapper">
+          <!-- Локальная картинка, которую ты загрузил; путь: /mnt/data/Снимок экрана 2025-11-20 223512.png -->
+          <img src="/mnt/data/Снимок экрана 2025-11-20 223512.png" alt="Cactus">
+        </div>
+      </div>
 
-<div class="tower">
-  <h3>Strawberry</h3>
-  <p>Medium damage, fast attack speed.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Strawberry" alt="Strawberry PvZ">
-  </div>
-</div>
+      <!-- остальные башни (временные плейсхолдеры) -->
+      <div class="card">
+        <div class="tower-meta"><h3>Watermelon</h3><p>Heavy splash damage.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Water" alt="Watermelon"></div>
+      </div>
 
-<div class="tower">
-  <h3>Carnivorous Plant</h3>
-  <p>Bites zombies in melee range.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Carnivorous" alt="Carnivorous PvZ">
-  </div>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Cocotank</h3><p>High single-target damage.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Coco" alt="Cocotank"></div>
+      </div>
 
-<div class="tower">
-  <h3>Mr Carrot</h3>
-  <p>Long range, shoots carrots.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Mr+Carrot" alt="Mr Carrot PvZ">
-  </div>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Lemon Pult</h3><p>Long-range lemons.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Lemon" alt="Lemon"></div>
+      </div>
 
-<div class="tower">
-  <h3>Witch Hazel</h3>
-  <p>Magic attack that slows zombies.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Witch+Hazel" alt="Witch Hazel PvZ">
-  </div>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Sunflower</h3><p>Generates sun for building.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Sun" alt="Sunflower"></div>
+        <div class="sun-effect" aria-hidden="true"></div>
+      </div>
 
-<div class="tower">
-  <h3>Jack</h3>
-  <p>Explosive pumpkin attack.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Jack" alt="Jack PvZ">
-  </div>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Strawberry</h3><p>Fast attacker.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Straw" alt="Strawberry"></div>
+      </div>
 
-<div class="tower">
-  <h3>Citron</h3>
-  <p>Heavy firepower with high range.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Citron" alt="Citron PvZ">
-  </div>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Carnivorous Plant</h3><p>Melee chomper.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carn" alt="Carnivorous"></div>
+      </div>
 
-<div class="tower">
-  <h3>Fire Peashooter</h3>
-  <p>Shoots fire peas, deals extra damage.</p>
-  <div class="tower-img-wrapper">
-    <img src="https://via.placeholder.com/100x100.png?text=Fire+Peashooter" alt="Fire Peashooter PvZ">
-  </div>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Mr Carrot</h3><p>Long-range shot.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carrot" alt="Mr Carrot"></div>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Witch Hazel</h3><p>Slows enemies.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Witch" alt="Witch Hazel"></div>
+      </div>
 
-<div class="section" id="zombies">
-<h2>Zombies</h2>
-<div class="zombie"><h3>Regular Zombie</h3><p>Slow, basic enemy. Appears in early waves.</p></div>
-<div class="zombie"><h3>Conehead Zombie</h3><p>More health, requires more damage to defeat.</p></div>
-<div class="zombie"><h3>Buckethead Zombie</h3><p>Very tough enemy, can take lots of hits.</p></div>
-<p>Wave: <span id="wave-counter">1</span></p>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Jack</h3><p>Explosive pumpkin attack.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Jack" alt="Jack"></div>
+      </div>
 
-<div class="section" id="updates">
-<h2>Latest Updates</h2>
-<p>Update 2.5: Все башни теперь в одинаковой рамке, включая Cactus с Imgur. Сохранены эффекты: пульсация башен, снаряды, счетчик волн и кнопка Roblox.</p>
-</div>
+      <div class="card">
+        <div class="tower-meta"><h3>Citron</h3><p>Heavy range DPS.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Citron" alt="Citron"></div>
+      </div>
 
-<footer>© 2025 PvZ Tower Defense – Fan Project</footer>
+      <div class="card">
+        <div class="tower-meta"><h3>Fire Peashooter</h3><p>Burns enemies.</p></div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Fire" alt="Fire Peashooter"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="zombies">
+    <h2 style="margin:0 0 8px 0">Zombies</h2>
+    <div class="card"><div class="tower-meta"><h3>Regular Zombie</h3><p>Weak, slow enemy.</p></div><div style="width:80px;height:80px;margin-left:auto"></div></div>
+    <div class="card"><div class="tower-meta"><h3>Conehead Zombie</h3><p>Armor on head.</p></div><div style="width:80px;height:80px;margin-left:auto"></div></div>
+    <div class="card"><div class="tower-meta"><h3>Buckethead</h3><p>Very tanky.</p></div><div style="width:80px;height:80px;margin-left:auto"></div></div>
+    <p style="color:var(--muted);margin-top:8px">Wave: <strong id="waveCounter">1</strong></p>
+  </section>
+
+  <section class="section" id="updates">
+    <h2 style="margin:0 0 8px 0">Updates</h2>
+    <p style="color:var(--muted)">Update: mixed style, particle effects, mobile tweaks, and fixed Cactus image.</p>
+  </section>
+
+</main>
+
+<!-- particles layer -->
+<div class="particles" id="particles"></div>
 
 <script>
-// Анимация появления секций
-const sections = document.querySelectorAll('.section');
-window.addEventListener('scroll', () => {
-  sections.forEach(section => {
-    const top = section.getBoundingClientRect().top;
-    const height = window.innerHeight;
-    if(top < height - 100){
-      section.style.opacity = 1;
-      section.style.transform = 'translateY(0)';
-    }
-  });
+/* -----------------------
+  Interactions & effects
+------------------------*/
+
+// Play button opens Roblox mode
+document.getElementById('playGame').addEventListener('click', () => {
+  window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank');
 });
 
-// Кнопка Play на Roblox с эффектами
-const playButton = document.querySelector('button');
-playButton.addEventListener('mouseenter', () => {
-  playButton.style.transform = 'scale(1.2)';
-  playButton.style.background = '#7ce47c';
-  playButton.style.color = '#000';
-});
-playButton.addEventListener('mouseleave', () => {
-  playButton.style.transform = 'scale(1)';
-  playButton.style.background = '#2d8f2d';
-  playButton.style.color = '#fff';
-});
-
-// Зомби прыгают при наведении
-const zombies = document.querySelectorAll('.zombie');
-zombies.forEach(zombie => {
-  zombie.addEventListener('mouseenter', () => {
-    zombie.style.transform = 'translateY(-10px)';
-  });
-  zombie.addEventListener('mouseleave', () => {
-    zombie.style.transform = 'translateY(0)';
-  });
-});
-
-// Башни слегка пульсируют
-const towers = document.querySelectorAll('.tower');
-setInterval(() => {
-  towers.forEach(tower => {
-    tower.style.transform = `scale(${1 + Math.random() * 0.05})`;
-  });
-}, 1000);
-
-// Динамический счётчик волн
+// wave counter (demo)
 let wave = 1;
-setInterval(() => {
+setInterval(()=> {
   wave++;
-  document.getElementById('wave-counter').textContent = wave;
+  document.getElementById('wave').textContent = wave;
+  document.getElementById('waveCounter')?.textContent = wave;
 }, 10000);
 
-// Символические снаряды от башен
-setInterval(() => {
-  const projectile = document.createElement('div');
-  projectile.classList.add('projectile');
-  projectile.style.top = Math.random() * 200 + 'px';
-  document.body.appendChild(projectile);
-  setTimeout(() => { projectile.remove(); }, 2000);
-}, 2000);
+// fake players number for UI (just demo)
+setInterval(()=> {
+  const p = Math.floor(20 + Math.random()*180);
+  document.getElementById('players').textContent = p;
+}, 3000);
 
-console.log("PvZ Tower Defense Dynamic Site Loaded!");
+// small tower breathing animation via CSS transform (periodic)
+const cards = document.querySelectorAll('.card');
+setInterval(()=> {
+  cards.forEach(c => c.style.transform = `translateY(${Math.random()*2}px)`);
+}, 1200);
+
+// hover micro animations: highlight meta & image
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mouseenter', ()=> {
+    const imgWrap = card.querySelector('.tower-img-wrapper');
+    if(imgWrap) imgWrap.style.transform = 'scale(1.05)';
+  });
+  card.addEventListener('mouseleave', ()=> {
+    const imgWrap = card.querySelector('.tower-img-wrapper');
+    if(imgWrap) imgWrap.style.transform = '';
+  });
+});
+
+// particles generator (leaves)
+const particlesRoot = document.getElementById('particles');
+function spawnLeaf(){
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf';
+  // random start position
+  leaf.style.left = Math.random()*100 + 'vw';
+  leaf.style.top = -20 + 'px';
+  leaf.style.opacity = (0.5 + Math.random()*0.6);
+  const size = 8 + Math.random()*18;
+  leaf.style.width = size + 'px';
+  leaf.style.height = (size*0.6) + 'px';
+  leaf.style.borderRadius = '3px';
+  leaf.style.transform = `rotate(${Math.random()*360}deg)`;
+  leaf.style.animationDuration = (6 + Math.random()*6) + 's';
+  particlesRoot.appendChild(leaf);
+  setTimeout(()=> leaf.remove(), 14000);
+}
+setInterval(spawnLeaf, 800);
+
+// reveal sections on load/scroll
+const sections = document.querySelectorAll('.section, .hero');
+function reveal(){ sections.forEach(s => {
+  const r = s.getBoundingClientRect();
+  if(r.top < window.innerHeight - 80) s.style.opacity = 1, s.style.transform = 'translateY(0)';
+})}
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);
+
+/* Accessibility: keyboard on play button */
+document.getElementById('playGame').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    document.getElementById('playGame').click();
+  }
+});
+
+console.log("New PvZ TD site loaded (mixed style).");
 </script>
-
 </body>
 </html>
+
