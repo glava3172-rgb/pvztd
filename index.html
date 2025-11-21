@@ -24,7 +24,6 @@ body{
   -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
   overflow-x:hidden;
-  scroll-behavior: smooth;
 }
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;background:linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));backdrop-filter: blur(6px);border-bottom: 1px solid rgba(255,255,255,0.03);}
 .brand{display:flex;align-items:center;gap:12px;}
@@ -33,7 +32,6 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;pa
 nav{display:flex;gap:10px;align-items:center}
 nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:14px;cursor:pointer;}
 nav a:hover{background:var(--glass); color:#fff}
-.lang-select{margin-left:10px;background:var(--panel);color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer;}
 .container{max-width:1080px;margin:26px auto;padding:0 18px;}
 .hero{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg, rgba(32,36,40,0.6), rgba(28,30,32,0.6));padding:18px;border-radius:16px;box-shadow:0 6px 30px rgba(0,0,0,0.6);}
 .hero-left{flex:1}
@@ -74,7 +72,7 @@ nav a:hover{background:var(--glass); color:#fff}
     <a onclick="scrollToSection('hero')">About</a>
     <a onclick="scrollToSection('towers')">Towers</a>
     <a onclick="scrollToSection('updates')">Updates</a>
-    <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+    <select id="langSelect" style="margin-left:12px;padding:4px;border-radius:6px;">
       <option value="en">EN</option>
       <option value="ru">RU</option>
     </select>
@@ -84,10 +82,13 @@ nav a:hover{background:var(--glass); color:#fff}
 <main class="container" role="main">
   <section class="hero" id="hero">
     <div class="hero-left">
-      <h2 data-en="PvZ Tower Defense — official fan site mode" data-ru="PvZ Tower Defense — официальный фан-сайт режима">PvZ Tower Defense — official fan site mode</h2>
-      <div class="desc" data-en="Shows towers, zombies, and descriptions. Click Play to open Roblox game." data-ru="Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть Roblox.">Shows towers, zombies, and descriptions. Click Play to open Roblox game.</div>
+      <h2 data-en="PvZ Tower Defense — Official fan site" data-ru="PvZ Tower Defense — официальный фан-сайт режима">PvZ Tower Defense — Official fan site</h2>
+      <div class="desc" data-en="Shows towers, zombies and brief info. Press Play to open Roblox game."
+           data-ru="Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox.">
+        Shows towers, zombies and brief info. Press Play to open Roblox game.
+      </div>
       <div style="margin-top:12px">
-        <button class="play-btn" id="playGame">Play PvZ TD</button>
+        <button class="play-btn" onclick="openRoblox()">Play PvZ TD</button>
       </div>
     </div>
     <div class="hero-right">
@@ -95,7 +96,9 @@ nav a:hover{background:var(--glass); color:#fff}
         <div style="font-size:12px;color:var(--muted)" data-en="Current wave" data-ru="Текущая волна">Current wave</div>
         <div id="wave" style="font-size:28px;font-weight:800">1</div>
       </div>
-      <div style="font-size:13px;color:var(--muted); text-align:center; margin-top:6px" data-en="Players online:" data-ru="Игроков онлайн:">Players online: <strong id="players">—</strong></div>
+      <div style="font-size:13px;color:var(--muted); text-align:center; margin-top:6px" data-en="Players online" data-ru="Игроков онлайн">
+        Players online: <strong id="players">—</strong>
+      </div>
     </div>
   </section>
 
@@ -103,33 +106,132 @@ nav a:hover{background:var(--glass); color:#fff}
     <h2 data-en="Towers" data-ru="Башни">Towers</h2>
     <div class="grid">
 
-      <!-- example tower -->
+      <!-- Cactus -->
       <div class="card">
         <div class="tower-meta">
-          <h3 data-en="Cactus" data-ru="Кактус">Cactus</h3>
-          <p data-en="Defensive tower — shoots spikes." data-ru="Оборонительная башня — стреляет шипами.">Defensive tower — shoots spikes.</p>
+          <h3>Cactus</h3>
+          <p>Defensive tower — shoots spikes, slows enemies.</p>
+          <div class="stats-box">
+            Damage: 50 → 150<br>
+            Range: 8 → 14<br>
+            Cooldown: 1.5 → 0.7<br>
+            DPS: 33 → 214
+          </div>
         </div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Cactus" alt="Cactus"></div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus"></div>
       </div>
 
+      <!-- Watermelon -->
       <div class="card">
         <div class="tower-meta">
-          <h3 data-en="Sunflower" data-ru="Подсолнух">Sunflower</h3>
-          <p data-en="Generates sun for building." data-ru="Генерирует солнце для строительства.">Generates sun for building.</p>
+          <h3>Watermelon</h3>
+          <p>Heavy splash damage.</p>
         </div>
-        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Sun" alt="Sunflower"></div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/kx1R8hU.png" alt="Watermelon"></div>
+      </div>
+
+      <!-- Cocotank -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Cocotank</h3>
+          <p>High single-target damage.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/0X7JkVx.png" alt="Cocotank"></div>
+      </div>
+
+      <!-- Lemon Pult -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Lemon Pult</h3>
+          <p>Long-range lemons.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/2iJb8YO.png" alt="Lemon Pult"></div>
+      </div>
+
+      <!-- Sunflower -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Sunflower</h3>
+          <p>Generates sun for building.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/7Gf5wY1.png" alt="Sunflower"></div>
         <div class="sun-effect" aria-hidden="true"></div>
       </div>
 
-      <!-- Add more towers as needed with placeholders -->
+      <!-- Strawberry -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Strawberry</h3>
+          <p>Fast attacker.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/yjI3hLi.png" alt="Strawberry"></div>
+      </div>
+
+      <!-- Carnivorous Plant -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Carnivorous Plant</h3>
+          <p>Melee chomper.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/4uFz8m2.png" alt="Carnivorous Plant"></div>
+      </div>
+
+      <!-- Mr Carrot -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Mr Carrot</h3>
+          <p>Long-range shot.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/8wL5c7q.png" alt="Mr Carrot"></div>
+      </div>
+
+      <!-- Witch Hazel -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Witch Hazel</h3>
+          <p>Slows enemies.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/L2g7wXQ.png" alt="Witch Hazel"></div>
+      </div>
+
+      <!-- Jack -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Jack</h3>
+          <p>Explosive pumpkin attack.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/9x5HdQm.png" alt="Jack"></div>
+      </div>
+
+      <!-- Citron -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Citron</h3>
+          <p>Heavy range DPS.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/mMThqQ0.png" alt="Citron"></div>
+      </div>
+
+      <!-- Fire Peashooter -->
+      <div class="card">
+        <div class="tower-meta">
+          <h3>Fire Peashooter</h3>
+          <p>Burns enemies.</p>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/2PbVq9u.png" alt="Fire Peashooter"></div>
+      </div>
 
     </div>
   </section>
 
   <section class="section" id="updates">
     <h2 data-en="Updates" data-ru="Обновления">Updates</h2>
-    <p data-en="Site improvements, particle effects, responsive design." data-ru="Улучшения сайта, частицы, адаптивный дизайн.">Site improvements, particle effects, responsive design.</p>
+    <p data-en="All towers now show real images. Play button fixed. Particle effects and mobile tweaks added."
+       data-ru="Все башни теперь с реальными изображениями. Кнопка Play исправлена. Добавлены эффекты частиц и мобильные улучшения.">
+      All towers now show real images. Play button fixed. Particle effects and mobile tweaks added.
+    </p>
   </section>
+
 </main>
 
 <div class="particles" id="particles"></div>
@@ -139,66 +241,66 @@ function openRoblox() {
   window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank');
 }
 
-document.getElementById('playGame').addEventListener('click', openRoblox);
-
-// Scroll to section
+// smooth scroll
 function scrollToSection(id){
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth'});
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-// Wave counter demo
-let wave = 1;
-setInterval(()=> {
+// wave counter
+let wave=1;
+setInterval(()=>{
   wave++;
-  document.getElementById('wave').textContent = wave;
-}, 10000);
+  document.getElementById('wave').textContent=wave;
+},10000);
 
-// Fake players number
-setInterval(()=> {
-  const p = Math.floor(20 + Math.random()*180);
-  document.getElementById('players').textContent = p;
-}, 3000);
+// fake players number
+setInterval(()=>{
+  const p=Math.floor(20+Math.random()*180);
+  document.getElementById('players').textContent=p;
+},3000);
 
-// Tower hover animation
-const cards = document.querySelectorAll('.card');
-setInterval(()=> { cards.forEach(c => c.style.transform = `translateY(${Math.random()*2}px)`); }, 1200);
+// tower hover animations
+const cards=document.querySelectorAll('.card');
+setInterval(()=>{
+  cards.forEach(c=>c.style.transform=`translateY(${Math.random()*2}px)`);
+},1200);
 cards.forEach(card=>{
-  card.addEventListener('mouseenter', ()=> {
-    const imgWrap = card.querySelector('.tower-img-wrapper');
-    if(imgWrap) imgWrap.style.transform = 'scale(1.05)';
+  card.addEventListener('mouseenter',()=>{
+    const imgWrap=card.querySelector('.tower-img-wrapper');
+    if(imgWrap) imgWrap.style.transform='scale(1.05)';
   });
-  card.addEventListener('mouseleave', ()=> {
-    const imgWrap = card.querySelector('.tower-img-wrapper');
-    if(imgWrap) imgWrap.style.transform = '';
+  card.addEventListener('mouseleave',()=>{
+    const imgWrap=card.querySelector('.tower-img-wrapper');
+    if(imgWrap) imgWrap.style.transform='';
   });
 });
 
-// Particles
-const particlesRoot = document.getElementById('particles');
+// particles
+const particlesRoot=document.getElementById('particles');
 function spawnLeaf(){
-  const leaf = document.createElement('div');
-  leaf.className = 'leaf';
-  leaf.style.left = Math.random()*100 + 'vw';
-  leaf.style.top = -20 + 'px';
-  leaf.style.opacity = (0.5 + Math.random()*0.6);
-  const size = 8 + Math.random()*18;
-  leaf.style.width = size + 'px';
-  leaf.style.height = (size*0.6) + 'px';
-  leaf.style.borderRadius = '3px';
-  leaf.style.transform = `rotate(${Math.random()*360}deg)`;
-  leaf.style.animationDuration = (6 + Math.random()*6) + 's';
+  const leaf=document.createElement('div');
+  leaf.className='leaf';
+  leaf.style.left=Math.random()*100+'vw';
+  leaf.style.top='-20px';
+  leaf.style.opacity=(0.5+Math.random()*0.6);
+  const size=8+Math.random()*18;
+  leaf.style.width=size+'px';
+  leaf.style.height=(size*0.6)+'px';
+  leaf.style.borderRadius='3px';
+  leaf.style.transform=`rotate(${Math.random()*360}deg)`;
+  leaf.style.animationDuration=(6+Math.random()*6)+'s';
   particlesRoot.appendChild(leaf);
-  setTimeout(()=> leaf.remove(), 14000);
+  setTimeout(()=>leaf.remove(),14000);
 }
-setInterval(spawnLeaf, 800);
+setInterval(spawnLeaf,800);
 
-// Language switcher
-function changeLanguage(lang){
+// language switch
+document.getElementById('langSelect').addEventListener('change', e=>{
+  const lang=e.target.value;
   document.querySelectorAll('[data-en]').forEach(el=>{
-    el.textContent = el.getAttribute(lang==='ru'?'data-ru':'data-en');
+    el.textContent=el.getAttribute(`data-${lang}`);
   });
-}
+});
 </script>
 
 </body>
