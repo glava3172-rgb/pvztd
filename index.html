@@ -20,19 +20,28 @@ body{
   font-family: Inter, Roboto, Arial, sans-serif;
   background: linear-gradient(180deg, rgba(20,22,23,0.95) 0%, rgba(9,10,11,1) 100%);
   color:#eef2f3;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
   overflow-x:hidden;
-  scroll-behavior: smooth; /* плавная прокрутка */
+  scroll-behavior:smooth;
 }
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;background:linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));backdrop-filter: blur(6px);border-bottom: 1px solid rgba(255,255,255,0.03);}
+header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 22px;
+  background:linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
 .brand{display:flex;align-items:center;gap:12px;}
-.logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#061013;box-shadow:0 6px 18px rgba(14,20,16,0.45);}
-.brand h1{font-size:18px;margin:0}
+.logo{
+  width:48px;height:48px;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#061013;
+  box-shadow:0 6px 18px rgba(14,20,16,0.45);
+}
 nav{display:flex;gap:10px;align-items:center}
 nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:14px;}
 nav a:hover{background:var(--glass); color:#fff}
+.lang-select{margin-left:10px;background:var(--panel);color:#fff;border:none;padding:4px 8px;border-radius:6px;cursor:pointer;}
 .container{max-width:1080px;margin:26px auto;padding:0 18px;}
 .hero{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg, rgba(32,36,40,0.6), rgba(28,30,32,0.6));padding:18px;border-radius:16px;box-shadow:0 6px 30px rgba(0,0,0,0.6);}
 .hero-left{flex:1}
@@ -65,25 +74,28 @@ nav a:hover{background:var(--glass); color:#fff}
   <div class="brand">
     <div class="logo">PvZ</div>
     <div>
-      <h1>PvZ Tower Defense</h1>
-      <div style="font-size:12px;color:var(--muted)">Fan project • Roblox mode</div>
+      <h1 id="siteTitle">PvZ Tower Defense</h1>
+      <div style="font-size:12px;color:var(--muted)" id="modeText">Fan project • Roblox mode</div>
     </div>
   </div>
   <nav>
-    <a href="#about">About</a>
-    <a href="#towers">Towers</a>
-    <a href="#updates">Updates</a>
+    <a href="#about" id="navAbout">About</a>
+    <a href="#towers" id="navTowers">Towers</a>
+    <a href="#updates" id="navUpdates">Updates</a>
+    <select class="lang-select" id="langSelect">
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
   </nav>
 </header>
 
-<!-- ЯКОРЬ ДЛЯ ABOUT -->
-<section id="about"></section>
+<section id="about" style="height:50px;"></section>
 
 <main class="container" role="main">
   <section class="hero">
     <div class="hero-left">
-      <h2 style="margin:0 0 6px 0">PvZ Tower Defense — официальный фан-сайт режима</h2>
-      <div class="desc">Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox.</div>
+      <h2 id="heroTitle" style="margin:0 0 6px 0">PvZ Tower Defense — Fan Site</h2>
+      <div class="desc" id="heroDesc">Showcasing towers, zombies, and brief descriptions. Click Play to open your Roblox game.</div>
       <div style="margin-top:12px">
         <button class="play-btn" id="playGame">Play PvZ TD</button>
       </div>
@@ -97,110 +109,205 @@ nav a:hover{background:var(--glass); color:#fff}
     </div>
   </section>
 
-  <!-- ЯКОРЬ ДЛЯ TOWERS -->
   <h2 id="towers"></h2>
   <section class="grid">
-    <!-- Пример башни -->
+    <!-- Repeat these blocks for all towers -->
     <div class="card">
       <div class="tower-meta">
-        <h3>Cactus</h3>
-        <p>Defensive tower — стреляет шипами, тормозит врагов.</p>
+        <h3 id="cactusTitle">Cactus</h3>
+        <p id="cactusDesc">Defensive tower shooting spikes.</p>
       </div>
-      <div class="tower-img-wrapper"><img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus"></div>
+      <div class="tower-img-wrapper">
+        <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus">
+      </div>
     </div>
-    <!-- Добавь остальные башни аналогично -->
+    <div class="card">
+      <div class="tower-meta"><h3 id="watermelonTitle">Watermelon</h3><p id="watermelonDesc">Heavy splash damage.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Water" alt="Watermelon"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="cocotankTitle">Cocotank</h3><p id="cocotankDesc">High single-target damage.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Coco" alt="Cocotank"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="lemonTitle">Lemon Pult</h3><p id="lemonDesc">Long-range lemons.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Lemon" alt="Lemon Pult"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="sunflowerTitle">Sunflower</h3><p id="sunflowerDesc">Generates sun for building.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Sun" alt="Sunflower"></div>
+      <div class="sun-effect" aria-hidden="true"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="strawberryTitle">Strawberry</h3><p id="strawberryDesc">Fast attacker.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Straw" alt="Strawberry"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="carnTitle">Carnivorous Plant</h3><p id="carnDesc">Melee chomper.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carn" alt="Carnivorous Plant"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="carrotTitle">Mr Carrot</h3><p id="carrotDesc">Long-range shot.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carrot" alt="Mr Carrot"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="witchTitle">Witch Hazel</h3><p id="witchDesc">Slows enemies.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Witch" alt="Witch Hazel"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="jackTitle">Jack</h3><p id="jackDesc">Explosive pumpkin attack.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Jack" alt="Jack"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="citronTitle">Citron</h3><p id="citronDesc">Heavy range DPS.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Citron" alt="Citron"></div>
+    </div>
+    <div class="card">
+      <div class="tower-meta"><h3 id="fireTitle">Fire Peashooter</h3><p id="fireDesc">Burns enemies.</p></div>
+      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Fire" alt="Fire Peashooter"></div>
+    </div>
   </section>
 
-  <!-- ЯКОРЬ ДЛЯ UPDATES -->
   <h2 id="updates"></h2>
   <section>
-    <h2>Updates</h2>
-    <p style="color:var(--muted)">Все башни показываются, кнопка Play работает, добавлены эффекты и мобильные улучшения.</p>
+    <h2 id="updatesTitle">Updates</h2>
+    <p style="color:var(--muted)" id="updatesDesc">All towers display full stats. Play button fixed. Particle effects, mobile tweaks, and Cactus image updated.</p>
   </section>
 </main>
 
 <div class="particles" id="particles"></div>
 
 <script>
-/* -----------------------
-      Интерфейс и эффекты
-------------------------*/
+// Language data
+const langData = {
+  en: {
+    nav: {about:"About", towers:"Towers", updates:"Updates"},
+    hero: {title:"PvZ Tower Defense — Fan Site", desc:"Showcasing towers, zombies, and brief descriptions. Click Play to open your Roblox game."},
+    cactus: {title:"Cactus", desc:"Defensive tower shooting spikes."},
+    watermelon: {title:"Watermelon", desc:"Heavy splash damage."},
+    cocotank: {title:"Cocotank", desc:"High single-target damage."},
+    lemon: {title:"Lemon Pult", desc:"Long-range lemons."},
+    sunflower: {title:"Sunflower", desc:"Generates sun for building."},
+    strawberry: {title:"Strawberry", desc:"Fast attacker."},
+    carn: {title:"Carnivorous Plant", desc:"Melee chomper."},
+    carrot: {title:"Mr Carrot", desc:"Long-range shot."},
+    witch: {title:"Witch Hazel", desc:"Slows enemies."},
+    jack: {title:"Jack", desc:"Explosive pumpkin attack."},
+    citron: {title:"Citron", desc:"Heavy range DPS."},
+    fire: {title:"Fire Peashooter", desc:"Burns enemies."},
+    updates: {title:"Updates", desc:"All towers display full stats. Play button fixed. Particle effects, mobile tweaks, and Cactus image updated."},
+  },
+  ru: {
+    nav: {about:"О проекте", towers:"Башни", updates:"Обновления"},
+    hero: {title:"PvZ Tower Defense — фан-сайт", desc:"Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox."},
+    cactus: {title:"Кактус", desc:"Оборонительная башня стреляет шипами."},
+    watermelon: {title:"Арбуз", desc:"Сильный урон по площади."},
+    cocotank: {title:"Кокотанк", desc:"Высокий урон по одной цели."},
+    lemon: {title:"Лимонный Пульт", desc:"Дальнобойные лимоны."},
+    sunflower: {title:"Подсолнух", desc:"Генерирует солнце для строительства."},
+    strawberry: {title:"Клубника", desc:"Быстрый атакующий."},
+    carn: {title:"Растение-хищник", desc:"Ближний бой."},
+    carrot: {title:"Мистер Морковка", desc:"Дальний выстрел."},
+    witch: {title:"Ведьма Хейзел", desc:"Замедляет врагов."},
+    jack: {title:"Джек", desc:"Взрывная атака тыквой."},
+    citron: {title:"Цитрон", desc:"Сильный дальний урон."},
+    fire: {title:"Огненный Горохострел", desc:"Поджигает врагов."},
+    updates: {title:"Обновления", desc:"Все башни теперь показывают полные характеристики. Кнопка Play исправлена. Эффекты частиц и мобильные исправления."},
+  }
+};
+
+// Apply language
+const langSelect = document.getElementById('langSelect');
+function applyLanguage(lang){
+  const data = langData[lang];
+  document.getElementById('navAbout').textContent = data.nav.about;
+  document.getElementById('navTowers').textContent = data.nav.towers;
+  document.getElementById('navUpdates').textContent = data.nav.updates;
+  document.getElementById('heroTitle').textContent = data.hero.title;
+  document.getElementById('heroDesc').textContent = data.hero.desc;
+
+  document.getElementById('cactusTitle').textContent = data.cactus.title;
+  document.getElementById('cactusDesc').textContent = data.cactus.desc;
+  document.getElementById('watermelonTitle').textContent = data.watermelon.title;
+  document.getElementById('watermelonDesc').textContent = data.watermelon.desc;
+  document.getElementById('cocotankTitle').textContent = data.cocotank.title;
+  document.getElementById('cocotankDesc').textContent = data.cocotank.desc;
+  document.getElementById('lemonTitle').textContent = data.lemon.title;
+  document.getElementById('lemonDesc').textContent = data.lemon.desc;
+  document.getElementById('sunflowerTitle').textContent = data.sunflower.title;
+  document.getElementById('sunflowerDesc').textContent = data.sunflower.desc;
+  document.getElementById('strawberryTitle').textContent = data.strawberry.title;
+  document.getElementById('strawberryDesc').textContent = data.strawberry.desc;
+  document.getElementById('carnTitle').textContent = data.carn.title;
+  document.getElementById('carnDesc').textContent = data.carn.desc;
+  document.getElementById('carrotTitle').textContent = data.carrot.title;
+  document.getElementById('carrotDesc').textContent = data.carrot.desc;
+  document.getElementById('witchTitle').textContent = data.witch.title;
+  document.getElementById('witchDesc').textContent = data.witch.desc;
+  document.getElementById('jackTitle').textContent = data.jack.title;
+  document.getElementById('jackDesc').textContent = data.jack.desc;
+  document.getElementById('citronTitle').textContent = data.citron.title;
+  document.getElementById('citronDesc').textContent = data.citron.desc;
+  document.getElementById('fireTitle').textContent = data.fire.title;
+  document.getElementById('fireDesc').textContent = data.fire.desc;
+
+  document.getElementById('updatesTitle').textContent = data.updates.title;
+  document.getElementById('updatesDesc').textContent = data.updates.desc;
+}
+langSelect.addEventListener('change',()=>applyLanguage(langSelect.value));
+applyLanguage('en'); // default
 
 // Play button
 document.getElementById('playGame').addEventListener('click', ()=> {
-  window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense', '_blank');
+  window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense','_blank');
 });
 
-// wave counter demo
-let wave = 1;
-setInterval(()=> {
-  wave++;
-  document.getElementById('wave').textContent = wave;
-}, 10000);
+// Wave counter
+let wave=1;
+setInterval(()=>{wave++;document.getElementById('wave').textContent=wave;},10000);
 
-// fake players
-setInterval(()=> {
-  const p = Math.floor(20 + Math.random()*180);
-  document.getElementById('players').textContent = p;
-}, 3000);
+// Fake players
+setInterval(()=>{document.getElementById('players').textContent=Math.floor(20+Math.random()*180);},3000);
 
-// tower breathing
-const cards = document.querySelectorAll('.card');
-setInterval(()=> {
-  cards.forEach(c => c.style.transform = `translateY(${Math.random()*2}px)`);
-}, 1200);
+// Tower breathing
+const cards=document.querySelectorAll('.card');
+setInterval(()=>{cards.forEach(c=>c.style.transform=`translateY(${Math.random()*2}px)`);},1200);
 
-// hover animation
+// Hover effect
 cards.forEach(card=>{
-  card.addEventListener('mouseenter', ()=> {
-    const imgWrap = card.querySelector('.tower-img-wrapper');
-    if(imgWrap) imgWrap.style.transform = 'scale(1.05)';
-  });
-  card.addEventListener('mouseleave', ()=> {
-    const imgWrap = card.querySelector('.tower-img-wrapper');
-    if(imgWrap) imgWrap.style.transform = '';
-  });
+  card.addEventListener('mouseenter',()=>{card.querySelector('.tower-img-wrapper').style.transform='scale(1.05)';});
+  card.addEventListener('mouseleave',()=>{card.querySelector('.tower-img-wrapper').style.transform='';});
 });
 
-// particles
-const particlesRoot = document.getElementById('particles');
+// Particles
+const particlesRoot=document.getElementById('particles');
 function spawnLeaf(){
-  const leaf = document.createElement('div');
-  leaf.className = 'leaf';
-  leaf.style.left = Math.random()*100 + 'vw';
-  leaf.style.top = -20 + 'px';
-  leaf.style.opacity = (0.5 + Math.random()*0.6);
-  const size = 8 + Math.random()*18;
-  leaf.style.width = size + 'px';
-  leaf.style.height = (size*0.6) + 'px';
-  leaf.style.borderRadius = '3px';
-  leaf.style.transform = `rotate(${Math.random()*360}deg)`;
-  leaf.style.animationDuration = (6 + Math.random()*6) + 's';
+  const leaf=document.createElement('div');
+  leaf.className='leaf';
+  leaf.style.left=Math.random()*100+'vw';
+  leaf.style.top='-20px';
+  leaf.style.opacity=0.5+Math.random()*0.6;
+  const size=8+Math.random()*18;
+  leaf.style.width=size+'px';
+  leaf.style.height=size*0.6+'px';
+  leaf.style.borderRadius='3px';
+  leaf.style.transform=`rotate(${Math.random()*360}deg)`;
+  leaf.style.animationDuration=(6+Math.random()*6)+'s';
   particlesRoot.appendChild(leaf);
-  setTimeout(()=> leaf.remove(), 14000);
+  setTimeout(()=>leaf.remove(),14000);
 }
-setInterval(spawnLeaf, 800);
+setInterval(spawnLeaf,800);
 
-/* -----------------------
-      Плавная прокрутка меню
-------------------------*/
-document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-  link.addEventListener("click", function(e) {
+// Smooth scroll for menu
+document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',function(e){
     e.preventDefault();
-    const id = this.getAttribute("href");
-
-    if(id === "#about") {
-      window.scrollTo({top:0, behavior:"smooth"});
-      return;
-    }
-
-    const target = document.querySelector(id);
-    if(target) {
-      target.scrollIntoView({behavior:"smooth", block:"start"});
-    }
+    const id=this.getAttribute('href');
+    if(id==='#about'){window.scrollTo({top:0,behavior:'smooth'});return;}
+    const target=document.querySelector(id);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
 </script>
-
 </body>
 </html>
