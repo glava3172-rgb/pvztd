@@ -50,12 +50,15 @@ nav a:hover{background:var(--glass); color:#fff}
 .play-btn:active{transform:scale(.99)}
 .desc{color:var(--muted);line-height:1.4;margin-top:8px;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px;}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--card-radius);padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;align-items:center;position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--card-radius);padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;align-items:center;position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;opacity:0;transform:translateY(20px);}
+.card.visible{opacity:1;transform:translateY(0);transition:opacity .5s ease, transform .5s ease;}
 .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.6); }
 .tower-meta{flex:1}
 .tower-meta h3{margin:0;font-size:16px}
 .tower-meta p{margin:6px 0 0;font-size:13px;color:var(--muted)}
-.stats-box{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.4}
+.stats-box{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.4;transition:all 0.3s ease;opacity:0;}
+.stats-box.visible{opacity:1;}
+.stats-box.highlight{color:#38d169; font-weight:700; transform:scale(1.05);}
 .tower-img-wrapper{width:80px;height:80px;border-radius:10px;border:2px solid rgba(255,255,255,0.04);overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.01));transition: box-shadow .25s ease, transform .25s ease;}
 .tower-img-wrapper img{ width:100%; height:100%; object-fit:cover; display:block; }
 .card:hover .tower-img-wrapper{ box-shadow: 0 8px 30px rgba(56,209,105,0.18); transform:scale(1.03); border-color: rgba(56,209,105,0.7); }
@@ -109,196 +112,57 @@ nav a:hover{background:var(--glass); color:#fff}
     </div>
   </section>
 
-  <h2 id="towers"></h2>
-  <section class="grid">
-    <!-- Repeat these blocks for all towers -->
-    <div class="card">
-      <div class="tower-meta">
-        <h3 id="cactusTitle">Cactus</h3>
-        <p id="cactusDesc">Defensive tower shooting spikes.</p>
+  <section id="towers">
+    <h2>Towers</h2>
+    <div class="grid">
+      <div class="card" data-stats='{"Damage":[50,150],"Range":[8,14],"Cooldown":[1.5,0.7],"DPS":[33,214]}'>
+        <div class="tower-meta">
+          <h3>Cactus</h3>
+          <p>Defensive tower shooting spikes.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus"></div>
+        <div class="sun-effect"></div>
       </div>
-      <div class="tower-img-wrapper">
-        <img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus">
-      </div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="watermelonTitle">Watermelon</h3><p id="watermelonDesc">Heavy splash damage.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Water" alt="Watermelon"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="cocotankTitle">Cocotank</h3><p id="cocotankDesc">High single-target damage.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Coco" alt="Cocotank"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="lemonTitle">Lemon Pult</h3><p id="lemonDesc">Long-range lemons.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Lemon" alt="Lemon Pult"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="sunflowerTitle">Sunflower</h3><p id="sunflowerDesc">Generates sun for building.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Sun" alt="Sunflower"></div>
-      <div class="sun-effect" aria-hidden="true"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="strawberryTitle">Strawberry</h3><p id="strawberryDesc">Fast attacker.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Straw" alt="Strawberry"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="carnTitle">Carnivorous Plant</h3><p id="carnDesc">Melee chomper.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carn" alt="Carnivorous Plant"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="carrotTitle">Mr Carrot</h3><p id="carrotDesc">Long-range shot.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carrot" alt="Mr Carrot"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="witchTitle">Witch Hazel</h3><p id="witchDesc">Slows enemies.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Witch" alt="Witch Hazel"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="jackTitle">Jack</h3><p id="jackDesc">Explosive pumpkin attack.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Jack" alt="Jack"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="citronTitle">Citron</h3><p id="citronDesc">Heavy range DPS.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Citron" alt="Citron"></div>
-    </div>
-    <div class="card">
-      <div class="tower-meta"><h3 id="fireTitle">Fire Peashooter</h3><p id="fireDesc">Burns enemies.</p></div>
-      <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Fire" alt="Fire Peashooter"></div>
+      <!-- Добавьте другие башни аналогично -->
     </div>
   </section>
 
-  <h2 id="updates"></h2>
-  <section>
-    <h2 id="updatesTitle">Updates</h2>
-    <p style="color:var(--muted)" id="updatesDesc">All towers display full stats. Play button fixed. Particle effects, mobile tweaks, and Cactus image updated.</p>
+  <section id="updates">
+    <h2>Updates</h2>
+    <p style="color:var(--muted)">All towers display full stats. Play button fixed. Particle effects, mobile tweaks, and Cactus image updated.</p>
   </section>
 </main>
 
 <div class="particles" id="particles"></div>
 
 <script>
-// Language data
+// Language
 const langData = {
-  en: {
-    nav: {about:"About", towers:"Towers", updates:"Updates"},
-    hero: {title:"PvZ Tower Defense — Fan Site", desc:"Showcasing towers, zombies, and brief descriptions. Click Play to open your Roblox game."},
-    cactus: {title:"Cactus", desc:"Defensive tower shooting spikes."},
-    watermelon: {title:"Watermelon", desc:"Heavy splash damage."},
-    cocotank: {title:"Cocotank", desc:"High single-target damage."},
-    lemon: {title:"Lemon Pult", desc:"Long-range lemons."},
-    sunflower: {title:"Sunflower", desc:"Generates sun for building."},
-    strawberry: {title:"Strawberry", desc:"Fast attacker."},
-    carn: {title:"Carnivorous Plant", desc:"Melee chomper."},
-    carrot: {title:"Mr Carrot", desc:"Long-range shot."},
-    witch: {title:"Witch Hazel", desc:"Slows enemies."},
-    jack: {title:"Jack", desc:"Explosive pumpkin attack."},
-    citron: {title:"Citron", desc:"Heavy range DPS."},
-    fire: {title:"Fire Peashooter", desc:"Burns enemies."},
-    updates: {title:"Updates", desc:"All towers display full stats. Play button fixed. Particle effects, mobile tweaks, and Cactus image updated."},
-  },
-  ru: {
-    nav: {about:"О проекте", towers:"Башни", updates:"Обновления"},
-    hero: {title:"PvZ Tower Defense — фан-сайт", desc:"Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox."},
-    cactus: {title:"Кактус", desc:"Оборонительная башня стреляет шипами."},
-    watermelon: {title:"Арбуз", desc:"Сильный урон по площади."},
-    cocotank: {title:"Кокотанк", desc:"Высокий урон по одной цели."},
-    lemon: {title:"Лимонный Пульт", desc:"Дальнобойные лимоны."},
-    sunflower: {title:"Подсолнух", desc:"Генерирует солнце для строительства."},
-    strawberry: {title:"Клубника", desc:"Быстрый атакующий."},
-    carn: {title:"Растение-хищник", desc:"Ближний бой."},
-    carrot: {title:"Мистер Морковка", desc:"Дальний выстрел."},
-    witch: {title:"Ведьма Хейзел", desc:"Замедляет врагов."},
-    jack: {title:"Джек", desc:"Взрывная атака тыквой."},
-    citron: {title:"Цитрон", desc:"Сильный дальний урон."},
-    fire: {title:"Огненный Горохострел", desc:"Поджигает врагов."},
-    updates: {title:"Обновления", desc:"Все башни теперь показывают полные характеристики. Кнопка Play исправлена. Эффекты частиц и мобильные исправления."},
-  }
+  en:{nav:{about:"About",towers:"Towers",updates:"Updates"},hero:{title:"PvZ Tower Defense — Fan Site",desc:"Showcasing towers, zombies, and brief descriptions. Click Play to open your Roblox game."}},
+  ru:{nav:{about:"О проекте",towers:"Башни",updates:"Обновления"},hero:{title:"PvZ Tower Defense — фан-сайт",desc:"Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox."}}
 };
-
-// Apply language
-const langSelect = document.getElementById('langSelect');
+const langSelect=document.getElementById('langSelect');
 function applyLanguage(lang){
-  const data = langData[lang];
-  document.getElementById('navAbout').textContent = data.nav.about;
-  document.getElementById('navTowers').textContent = data.nav.towers;
-  document.getElementById('navUpdates').textContent = data.nav.updates;
-  document.getElementById('heroTitle').textContent = data.hero.title;
-  document.getElementById('heroDesc').textContent = data.hero.desc;
-
-  document.getElementById('cactusTitle').textContent = data.cactus.title;
-  document.getElementById('cactusDesc').textContent = data.cactus.desc;
-  document.getElementById('watermelonTitle').textContent = data.watermelon.title;
-  document.getElementById('watermelonDesc').textContent = data.watermelon.desc;
-  document.getElementById('cocotankTitle').textContent = data.cocotank.title;
-  document.getElementById('cocotankDesc').textContent = data.cocotank.desc;
-  document.getElementById('lemonTitle').textContent = data.lemon.title;
-  document.getElementById('lemonDesc').textContent = data.lemon.desc;
-  document.getElementById('sunflowerTitle').textContent = data.sunflower.title;
-  document.getElementById('sunflowerDesc').textContent = data.sunflower.desc;
-  document.getElementById('strawberryTitle').textContent = data.strawberry.title;
-  document.getElementById('strawberryDesc').textContent = data.strawberry.desc;
-  document.getElementById('carnTitle').textContent = data.carn.title;
-  document.getElementById('carnDesc').textContent = data.carn.desc;
-  document.getElementById('carrotTitle').textContent = data.carrot.title;
-  document.getElementById('carrotDesc').textContent = data.carrot.desc;
-  document.getElementById('witchTitle').textContent = data.witch.title;
-  document.getElementById('witchDesc').textContent = data.witch.desc;
-  document.getElementById('jackTitle').textContent = data.jack.title;
-  document.getElementById('jackDesc').textContent = data.jack.desc;
-  document.getElementById('citronTitle').textContent = data.citron.title;
-  document.getElementById('citronDesc').textContent = data.citron.desc;
-  document.getElementById('fireTitle').textContent = data.fire.title;
-  document.getElementById('fireDesc').textContent = data.fire.desc;
-
-  document.getElementById('updatesTitle').textContent = data.updates.title;
-  document.getElementById('updatesDesc').textContent = data.updates.desc;
+  const data=langData[lang];
+  document.getElementById('navAbout').textContent=data.nav.about;
+  document.getElementById('navTowers').textContent=data.nav.towers;
+  document.getElementById('navUpdates').textContent=data.nav.updates;
+  document.getElementById('heroTitle').textContent=data.hero.title;
+  document.getElementById('heroDesc').textContent=data.hero.desc;
 }
 langSelect.addEventListener('change',()=>applyLanguage(langSelect.value));
-applyLanguage('en'); // default
+applyLanguage('en');
 
 // Play button
-document.getElementById('playGame').addEventListener('click', ()=> {
-  window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense','_blank');
-});
+document.getElementById('playGame').addEventListener('click',()=>window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense','_blank'));
 
-// Wave counter
+// Wave & Players
 let wave=1;
 setInterval(()=>{wave++;document.getElementById('wave').textContent=wave;},10000);
-
-// Fake players
 setInterval(()=>{document.getElementById('players').textContent=Math.floor(20+Math.random()*180);},3000);
 
-// Tower breathing
-const cards=document.querySelectorAll('.card');
-setInterval(()=>{cards.forEach(c=>c.style.transform=`translateY(${Math.random()*2}px)`);},1200);
-
-// Hover effect
-cards.forEach(card=>{
-  card.addEventListener('mouseenter',()=>{card.querySelector('.tower-img-wrapper').style.transform='scale(1.05)';});
-  card.addEventListener('mouseleave',()=>{card.querySelector('.tower-img-wrapper').style.transform='';});
-});
-
-// Particles
-const particlesRoot=document.getElementById('particles');
-function spawnLeaf(){
-  const leaf=document.createElement('div');
-  leaf.className='leaf';
-  leaf.style.left=Math.random()*100+'vw';
-  leaf.style.top='-20px';
-  leaf.style.opacity=0.5+Math.random()*0.6;
-  const size=8+Math.random()*18;
-  leaf.style.width=size+'px';
-  leaf.style.height=size*0.6+'px';
-  leaf.style.borderRadius='3px';
-  leaf.style.transform=`rotate(${Math.random()*360}deg)`;
-  leaf.style.animationDuration=(6+Math.random()*6)+'s';
-  particlesRoot.appendChild(leaf);
-  setTimeout(()=>leaf.remove(),14000);
-}
-setInterval(spawnLeaf,800);
-
-// Smooth scroll for menu
+// Smooth nav scroll
 document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
   link.addEventListener('click',function(e){
     e.preventDefault();
@@ -308,6 +172,35 @@ document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
     if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+// Animate tower stats line by line
+const cards=document.querySelectorAll('.card');
+cards.forEach((card,index)=>{
+  setTimeout(()=>{
+    card.classList.add('visible');
+    const statsBox=card.querySelector('.stats-box');
+    const statsData=JSON.parse(card.dataset.stats);
+    let delay=0;
+    statsBox.innerHTML='';
+    Object.keys(statsData).forEach(key=>{
+      const line=document.createElement('div');
+      line.style.opacity=0;
+      line.textContent=`${key}: ${statsData[key][0]} → ${statsData[key][1]}`;
+      statsBox.appendChild(line);
+      setTimeout(()=>{line.style.transition='opacity 0.5s';line.style.opacity=1;}, delay);
+      delay+=150;
+    });
+    statsBox.classList.add('visible');
+  }, index*150);
+  const statsBox=card.querySelector('.stats-box');
+  card.addEventListener('mouseenter',()=>statsBox.classList.add('highlight'));
+  card.addEventListener('mouseleave',()=>statsBox.classList.remove('highlight'));
+});
+
+// Particles
+const particlesRoot=document.getElementById('particles');
+function spawnLeaf(){const leaf=document.createElement('div');leaf.className='leaf';leaf.style.left=Math.random()*100+'vw';leaf.style.top='-20px';leaf.style.opacity=0.5+Math.random()*0.6;const size=8+Math.random()*18;leaf.style.width=size+'px';leaf.style.height=size*0.6+'px';leaf.style.borderRadius='3px';leaf.style.transform=`rotate(${Math.random()*360}deg)`;leaf.style.animationDuration=(6+Math.random()*6)+'s';particlesRoot.appendChild(leaf);setTimeout(()=>leaf.remove(),14000);}
+setInterval(spawnLeaf,800);
 </script>
 </body>
 </html>
