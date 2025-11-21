@@ -50,8 +50,8 @@ nav a:hover{background:var(--glass); color:#fff}
 .play-btn:active{transform:scale(.99)}
 .desc{color:var(--muted);line-height:1.4;margin-top:8px;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px;}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--card-radius);padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;align-items:center;position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;opacity:0;transform:translateY(20px);}
-.card.visible{opacity:1;transform:translateY(0);transition:opacity .5s ease, transform .5s ease;}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--card-radius);padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;align-items:center;position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease,opacity .5s ease;opacity:0;transform:translateY(20px);}
+.card.visible{opacity:1;transform:translateY(0);}
 .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.6); }
 .tower-meta{flex:1}
 .tower-meta h3{margin:0;font-size:16px}
@@ -115,6 +115,7 @@ nav a:hover{background:var(--glass); color:#fff}
   <section id="towers">
     <h2>Towers</h2>
     <div class="grid">
+      <!-- Cactus -->
       <div class="card" data-stats='{"Damage":[50,150],"Range":[8,14],"Cooldown":[1.5,0.7],"DPS":[33,214]}'>
         <div class="tower-meta">
           <h3>Cactus</h3>
@@ -124,7 +125,115 @@ nav a:hover{background:var(--glass); color:#fff}
         <div class="tower-img-wrapper"><img src="https://i.imgur.com/bwGWSXc.png" alt="Cactus"></div>
         <div class="sun-effect"></div>
       </div>
-      <!-- Добавьте другие башни аналогично -->
+      <!-- Watermelon -->
+      <div class="card" data-stats='{"Damage":[80,200],"Range":[6,12],"Cooldown":[2,1],"DPS":[40,200]}'>
+        <div class="tower-meta">
+          <h3>Watermelon</h3>
+          <p>Heavy splash damage.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Water" alt="Watermelon"></div>
+      </div>
+      <!-- Cocotank -->
+      <div class="card" data-stats='{"Damage":[120,300],"Range":[7,14],"Cooldown":[2,1.2],"DPS":[60,250]}'>
+        <div class="tower-meta">
+          <h3>Cocotank</h3>
+          <p>High single-target damage.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Coco" alt="Cocotank"></div>
+      </div>
+      <!-- Lemon Pult -->
+      <div class="card" data-stats='{"Damage":[60,180],"Range":[10,18],"Cooldown":[1.2,0.6],"DPS":[50,300]}'>
+        <div class="tower-meta">
+          <h3>Lemon Pult</h3>
+          <p>Long-range lemons.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Lemon" alt="Lemon Pult"></div>
+      </div>
+      <!-- Sunflower -->
+      <div class="card" data-stats='{"Sun":[25,50]}'>
+        <div class="tower-meta">
+          <h3>Sunflower</h3>
+          <p>Generates sun for building.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Sun" alt="Sunflower"></div>
+        <div class="sun-effect"></div>
+      </div>
+      <!-- Strawberry -->
+      <div class="card" data-stats='{"Damage":[30,90],"Range":[6,12],"Cooldown":[0.8,0.4],"DPS":[37,225]}'>
+        <div class="tower-meta">
+          <h3>Strawberry</h3>
+          <p>Fast attacker.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Straw" alt="Strawberry"></div>
+      </div>
+      <!-- Carnivorous Plant -->
+      <div class="card" data-stats='{"Damage":[100,250],"Range":[1,1],"Cooldown":[1.8,0.9],"DPS":[55,280]}'>
+        <div class="tower-meta">
+          <h3>Carnivorous Plant</h3>
+          <p>Melee chomper.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carn" alt="Carnivorous Plant"></div>
+      </div>
+      <!-- Mr Carrot -->
+      <div class="card" data-stats='{"Damage":[70,200],"Range":[12,20],"Cooldown":[1.5,0.8],"DPS":[46,250]}'>
+        <div class="tower-meta">
+          <h3>Mr Carrot</h3>
+          <p>Long-range shot.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Carrot" alt="Mr Carrot"></div>
+      </div>
+      <!-- Witch Hazel -->
+      <div class="card" data-stats='{"Damage":[40,100],"Range":[8,14],"Cooldown":[1.5,0.7],"DPS":[27,143]}'>
+        <div class="tower-meta">
+          <h3>Witch Hazel</h3>
+          <p>Slows enemies.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Witch" alt="Witch Hazel"></div>
+      </div>
+      <!-- Jack -->
+      <div class="card" data-stats='{"Damage":[90,220],"Range":[7,13],"Cooldown":[2,1],"DPS":[45,220]}'>
+        <div class="tower-meta">
+          <h3>Jack</h3>
+          <p>Explosive pumpkin attack.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Jack" alt="Jack"></div>
+      </div>
+      <!-- Citron -->
+      <div class="card" data-stats='{"Damage":[100,300],"Range":[10,18],"Cooldown":[1.2,0.6],"DPS":[83,500]}'>
+        <div class="tower-meta">
+          <h3>Citron</h3>
+          <p>Heavy range DPS.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Citron" alt="Citron"></div>
+      </div>
+      <!-- Fire Peashooter -->
+      <div class="card" data-stats='{"Damage":[50,150],"Range":[8,14],"Cooldown":[1.5,0.7],"DPS":[33,214]}'>
+        <div class="tower-meta">
+          <h3>Fire Peashooter</h3>
+          <p>Burns enemies.</p>
+          <div class="stats-box"></div>
+        </div>
+        <div class="tower-img-wrapper"><img src="https://via.placeholder.com/80?text=Fire" alt="Fire Peashooter"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zombies">
+    <h2>Zombies</h2>
+    <div class="grid">
+      <div class="card"><div class="tower-meta"><h3>Regular Zombie</h3><p>Weak, slow enemy.</p></div></div>
+      <div class="card"><div class="tower-meta"><h3>Conehead Zombie</h3><p>Armor on head.</p></div></div>
+      <div class="card"><div class="tower-meta"><h3>Buckethead</h3><p>Very tanky.</p></div></div>
     </div>
   </section>
 
@@ -132,12 +241,13 @@ nav a:hover{background:var(--glass); color:#fff}
     <h2>Updates</h2>
     <p style="color:var(--muted)">All towers display full stats. Play button fixed. Particle effects, mobile tweaks, and Cactus image updated.</p>
   </section>
+
 </main>
 
 <div class="particles" id="particles"></div>
 
 <script>
-// Language
+// Language selection
 const langData = {
   en:{nav:{about:"About",towers:"Towers",updates:"Updates"},hero:{title:"PvZ Tower Defense — Fan Site",desc:"Showcasing towers, zombies, and brief descriptions. Click Play to open your Roblox game."}},
   ru:{nav:{about:"О проекте",towers:"Башни",updates:"Обновления"},hero:{title:"PvZ Tower Defense — фан-сайт",desc:"Показаны башни, зомби и краткие описания. Нажми Play чтобы открыть твою игру в Roblox."}}
@@ -157,12 +267,12 @@ applyLanguage('en');
 // Play button
 document.getElementById('playGame').addEventListener('click',()=>window.open('https://www.roblox.com/games/96532094607147/3-Hours-Plants-VS-Zombie-Tower-Defense','_blank'));
 
-// Wave & Players
+// Wave & Players demo
 let wave=1;
 setInterval(()=>{wave++;document.getElementById('wave').textContent=wave;},10000);
 setInterval(()=>{document.getElementById('players').textContent=Math.floor(20+Math.random()*180);},3000);
 
-// Smooth nav scroll
+// Smooth scroll nav
 document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
   link.addEventListener('click',function(e){
     e.preventDefault();
@@ -173,13 +283,14 @@ document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
   });
 });
 
-// Animate tower stats line by line
+// Animate tower stats
 const cards=document.querySelectorAll('.card');
 cards.forEach((card,index)=>{
   setTimeout(()=>{
     card.classList.add('visible');
     const statsBox=card.querySelector('.stats-box');
-    const statsData=JSON.parse(card.dataset.stats);
+    if(!statsBox) return;
+    const statsData=JSON.parse(card.dataset.stats || '{}');
     let delay=0;
     statsBox.innerHTML='';
     Object.keys(statsData).forEach(key=>{
@@ -193,8 +304,8 @@ cards.forEach((card,index)=>{
     statsBox.classList.add('visible');
   }, index*150);
   const statsBox=card.querySelector('.stats-box');
-  card.addEventListener('mouseenter',()=>statsBox.classList.add('highlight'));
-  card.addEventListener('mouseleave',()=>statsBox.classList.remove('highlight'));
+  card.addEventListener('mouseenter',()=>statsBox?.classList.add('highlight'));
+  card.addEventListener('mouseleave',()=>statsBox?.classList.remove('highlight'));
 });
 
 // Particles
